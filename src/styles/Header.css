@@ -1,0 +1,7 @@
+.imagenFondo{
+    background-image: url("../img/banner.png");
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+}
