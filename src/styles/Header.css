@@ -1,7 +1,45 @@
 .imagenFondo{
     background-image: url("../img/banner.png");
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 200px;
+    
+}
+
+.barra{
+    border-left: 1px solid #969696;
+    padding-left: 2rem;
+
+}
+@media screen and (max-width: 768px) {
+    .barra{ 
+    text-align: center;
+    border-left: none;
+    }
+}
+.flecha{
+    flex: 0 0 5%;
+    background: #000 url("../img/flecha.svg") no-repeat center;
+    cursor: pointer;
+    border: none;
+
+}
+.header{
+    padding: 5vh 5% 100px;
+}
+.form {
+    width: min-content;
+    margin: 5vh auto;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+}
+
+@media screen and (max-width: 700px) {
+    .movil{
+     
+        flex-direction: column;
+        flex-wrap: wrap;
+        background: #000;
+        text-align: center;
+    }
 }
