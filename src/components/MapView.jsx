@@ -1,20 +1,30 @@
-import React from 'react'
-import { MapContainer, TileLayer, Marker ,Popup} from 'react-leaflet'
+import {useState, useEffect} from 'react'
+import { MapContainer, TileLayer, Marker ,Popup, useMap} from 'react-leaflet'
 import '../styles/react-leaflet.css'
-import { MarkerIcon } from '../react-leaflet-icon'
 
-const MapView = () => {
-    const position = [9.099726451923722, -67.1502652169602]
+const MapView = ({lat, lon}) => {
+    /* let position = [9.099726451923722, -67.1502652169602] */
+  const [position, setPosition] = useState([lat,lon])
 
+  useEffect(() =>{
+    setPosition([lat,lon])
+  },[lat,lon])
+
+  const Hook = () => {
+    const View = useMap()
+    View.setView(position)
+    return null
+  }
   return(
-    <MapContainer center={[9.099726451923722, -67.1502652169602]} zoom={6} scrollWheelZoom={true}>
+    <MapContainer center={position} zoom={8} scrollWheelZoom={true}>
+      <Hook/>
     <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    <Marker position={[10.500094737208338, -67.00710998051179]}>
+    <Marker position={position}>
       <Popup>
-        Hola <br /> Estas Aqui!
+        Hola <br /> Estoy Aqui!
       </Popup>
     </Marker>
   </MapContainer>
