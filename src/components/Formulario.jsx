@@ -9,15 +9,15 @@ const Formulario = () => {
 
 /* ipEData es una variable para el DOM */
   const [ipData, setIpData] = useState({
-query: "190.79.83.21",
+    ip: "190.79.83.21",
 location:{
   status: "success",
-  countryCode: "VE",
-  regionName: "Miranda",
+  country_code: "VE",
+  region: "Miranda",
   city: "Caracas",
-  lat: 10.4966,
-  lon: -66.8446,
-  offset: -14400,
+  latitude: 10.4966,
+  longitude: -66.8446,
+  timezone: -14400,
   isp: "CANTV Servicios, Venezuela"
 }
 });
@@ -26,21 +26,21 @@ location:{
     const consultarApi = async () =>{
 
       const consulta = await axios(
-        `http://ip-api.com/json/${IP}?fields=status,message,countryCode,regionName,city,lat,lon,offset,isp,query`
+        `https://ipwhois.app/json/${IP}`
       );
 
       console.log(consulta.data)
 
       setIpData(consulta.data)
       setIpData({
-        query: consulta.data.query,
+        ip: consulta.data.ip,
         location: {
-          countryCode: consulta.data.countryCode,
-          regionName: consulta.data.regionName,
+          country_code: consulta.data.country_code,
+          region: consulta.data.region,
           city: consulta.data.city,
-          lat: consulta.data.lat,
-          lon: consulta.data.lng,
-          offset: consulta.data.offset,
+          latitude: consulta.data.latitude,
+          longitude: consulta.data.longitude,
+          timezone: consulta.data.timezone,
         },
         isp: consulta.data.isp,
       });
@@ -87,7 +87,7 @@ location:{
   <div className="bg-white flex flex-col md:flex-row w-auto px-14 justify-center rounded-lg">
         <div className="m-2 text-center">
           <div><p>IP ADDRESS</p></div>
-          <div>{isObjEmpty(ipData) ? "-- --" : <p>{ipData.query}</p>}</div>
+          <div>{isObjEmpty(ipData) ? "-- --" : <p>{ipData.ip}</p>}</div>
         </div>
 
         <div className="m-2 text-center">
@@ -95,7 +95,7 @@ location:{
           <div>{isObjEmpty(ipData) ? (
                 "-- --"
               ) : (
-                <p>{`${ipData.location.city}, ${ipData.location.regionName}, ${ipData.location.countryCode}`}</p>
+                <p>{`${ipData.location.city}, ${ipData.location.region}, ${ipData.location.country_code}`}</p>
               )}</div>
         </div>
 
@@ -104,7 +104,7 @@ location:{
           <div> {isObjEmpty(ipData) ? (
                 "-- --"
               ) : (
-                <p>{`UTC ${ipData.location.offset}`}</p>
+                <p>{`UTC ${ipData.location.current_time}`}</p>
               )}</div>
         </div>
 
